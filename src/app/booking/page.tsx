@@ -30,6 +30,8 @@ export default function BookingPage() {
   const { rollNo, logout, isAuthenticated } = useAuth();
   const router = useRouter();
 
+
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [teamMembers, setTeamMembers] = useState<string[]>(["", ""]);
   const [idCardFile, setIdCardFile] = useState<File | null>(null);
@@ -51,7 +53,7 @@ export default function BookingPage() {
         const { data: student } = await supabase
           .from("students")
           .select("id")
-          .eq("roll_no", rollNo)
+          .eq("roll_no", rollNo).eq('approved', true)
           .maybeSingle();
 
         if (!student) return;
@@ -188,6 +190,8 @@ export default function BookingPage() {
           semester: parseInt(semester),
           booking_date: bookingDate,
           time_slot: timeSlot,
+          email: email,
+          approved: false,
         },
       ]);
 
@@ -290,6 +294,19 @@ export default function BookingPage() {
                       )}
                     </div>
                   ))}
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-base font-semibold">
+                      Email
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={isLoading}
+                    />
+                  </div>
                   <Button
                     type="button"
                     variant="outline"
@@ -299,6 +316,7 @@ export default function BookingPage() {
                   >
                     <Plus className="h-4 w-4" /> Add Another Team Member
                   </Button>
+
                 </div>
 
                 <div className="space-y-2">
