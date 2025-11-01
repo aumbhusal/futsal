@@ -126,6 +126,12 @@ export default function BookingPage() {
       return false;
     }
 
+    if (!email) {
+      toast.error("Select a Email");
+      return false;
+
+    }
+
     const selectedDate = new Date(bookingDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -465,9 +471,14 @@ export default function BookingPage() {
                   )}
                 </Button>
               </form>
+              <div className="bg-amber-50 border border-amber-300 text-amber-800 text-sm rounded-lg p-3 leading-relaxed mt-10">
+                ⚠️ <strong>Notice:</strong> Double-check your details. Incorrect
+                information may lead to <strong>booking cancellation</strong>.
+              </div>
             </CardContent>
           </Card>
         </div>
+
       </div>
     </>
   );

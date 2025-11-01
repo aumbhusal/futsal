@@ -112,11 +112,6 @@ export default function LoginPage() {
                 />
               </div>
 
-              <div className="bg-amber-50 border border-amber-300 text-amber-800 text-sm rounded-lg p-3 leading-relaxed">
-                ⚠️ <strong>Notice:</strong> Double-check your details. Incorrect
-                information may lead to <strong>booking cancellation</strong>.
-              </div>
-
               <Button
                 type="submit"
                 className="w-full h-12 text-base font-semibold tracking-wide"
