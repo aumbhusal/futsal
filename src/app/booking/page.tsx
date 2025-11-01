@@ -30,7 +30,6 @@ export default function BookingPage() {
   const { rollNo, logout, isAuthenticated } = useAuth();
   const router = useRouter();
 
-
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [teamMembers, setTeamMembers] = useState<string[]>(["", ""]);
@@ -53,7 +52,8 @@ export default function BookingPage() {
         const { data: student } = await supabase
           .from("students")
           .select("id")
-          .eq("roll_no", rollNo).eq('approved', true)
+          .eq("roll_no", rollNo)
+          .eq("approved", true)
           .maybeSingle();
 
         if (!student) return;
@@ -129,7 +129,6 @@ export default function BookingPage() {
     if (!email) {
       toast.error("Select a Email");
       return false;
-
     }
 
     const selectedDate = new Date(bookingDate);
@@ -322,7 +321,6 @@ export default function BookingPage() {
                   >
                     <Plus className="h-4 w-4" /> Add Another Team Member
                   </Button>
-
                 </div>
 
                 <div className="space-y-2">
@@ -478,7 +476,6 @@ export default function BookingPage() {
             </CardContent>
           </Card>
         </div>
-
       </div>
     </>
   );
